@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-
 from app.models.jogos import Jogo
 
 
@@ -34,4 +33,14 @@ def get_jogo_by_id(
 ):
     return db.query(Jogo).filter(
         Jogo.id == jogo_id
+    ).first()
+
+
+def get_jogo_disponivel(
+    db: Session,
+    jogo_id: int
+):
+    return db.query(Jogo).filter(
+        Jogo.id == jogo_id,
+        Jogo.disponivel == True
     ).first()
