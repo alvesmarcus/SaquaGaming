@@ -34,9 +34,19 @@ def criar(
 
 @router.get("/", response_model=list[JogoResponse])
 def listar(
+    limit: int = 10,
+    offset: int = 0,
+    plataforma: str | None = None,
+    disponivel: bool | None = None,
     db: Session = Depends(get_db)
 ):
-    return listar_jogos(db)
+    return listar_jogos(
+        db=db,
+        limit=limit,
+        offset=offset,
+        plataforma=plataforma,
+        disponivel=disponivel
+    )
 
 
 @router.get("/{jogo_id}", response_model=JogoResponse)

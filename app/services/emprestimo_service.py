@@ -72,6 +72,12 @@ def devolver_jogo(
             detail="Empréstimo não encontrado"
         )
 
+    if emprestimo.devolvido:
+        raise HTTPException(
+            status_code=400,
+            detail="Este empréstimo já foi devolvido"
+        )
+
     jogo = get_jogo_by_id(
         db,
         emprestimo.jogo_id

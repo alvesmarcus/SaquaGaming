@@ -23,8 +23,20 @@ def criar_jogo(
     )
 
 
-def listar_jogos(db: Session):
-    return get_all_jogos(db)
+def listar_jogos(
+    db: Session,
+    limit: int = 10,
+    offset: int = 0,
+    plataforma: str | None = None,
+    disponivel: bool | None = None
+):
+    return get_all_jogos(
+        db=db,
+        limit=limit,
+        offset=offset,
+        plataforma=plataforma,
+        disponivel=disponivel
+    )
 
 
 def buscar_jogo_por_id(

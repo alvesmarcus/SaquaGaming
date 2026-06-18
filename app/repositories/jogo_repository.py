@@ -23,8 +23,26 @@ def create_jogo(
     return jogo
 
 
-def get_all_jogos(db: Session):
-    return db.query(Jogo).all()
+def get_all_jogos(
+    db: Session,
+    limit: int = 10,
+    offset: int = 0,
+    plataforma: str | None = None,
+    disponivel: bool | None = None
+):
+    query = db.query(Jogo)
+
+    if plataforma:
+        query = query.filter(
+            Jogo.plataforma == plataforma
+        )
+
+    if disponivel is not None:
+        query = query.filter(
+            Jogo.disponivel == disponivel
+        )
+
+    return query.offset(offset).limit(limit).all()
 
 
 def get_jogo_by_id(
